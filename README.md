@@ -1,5 +1,5 @@
-# wiki-notes
-## dev doc
+wiki-notes
+dev doc
 
 
  使用QT creator 进行开发.将任务分为四个组件:{
