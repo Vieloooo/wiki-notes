@@ -1,7 +1,5 @@
 wiki-notes
 dev doc
-
-
  使用QT creator 进行开发.将任务分为四个组件:{
         搜索和文件管理组件:{
             1.基本的文件夹,文件名,块名 搜索
@@ -32,4 +30,15 @@ dev doc
         }
     }
 }
-`
+
+referrence{
+    1.qt 5 quick intro http://c.biancheng.net/qt/
+    2.qt creator example{
+        1.markdown editor 
+        2.textedit example
+    }
+}
+kanban {
+    1. finish qt 5 quick intro :before 9.25
+    
+}
