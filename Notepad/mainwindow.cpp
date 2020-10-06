@@ -6,9 +6,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setCentralWidget(ui->textEdit);
-    QString initText = "<h1>welcome to Notepad</h2>";
+   // this->setCentralWidget(ui->textEdit);
+    QString initText = "<h1>welcome to Notepad</h1>";
     ui->textEdit->setText(initText);
+
 }
 
 MainWindow::~MainWindow()
@@ -58,4 +59,44 @@ void MainWindow::on_actionSave_triggered()
         out << text;
         file.close();
 
+}
+
+
+void MainWindow::handlePlainText()
+{
+    ui->textEdit->setText("");
+}
+
+
+
+void MainWindow::on_actioncopy_triggered()
+{
+    ui->textEdit->copy();
+}
+
+void MainWindow::on_actionpaste_triggered()
+{
+    ui->textEdit->paste();
+}
+
+void MainWindow::on_actioncut_triggered()
+{
+    ui->textEdit->cut();
+}
+
+void MainWindow::on_actionredo_triggered()
+{
+    ui->textEdit->redo();
+}
+
+void MainWindow::on_actionundo_triggered()
+{
+    ui->textEdit->undo();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    chooseModal  *modal = new chooseModal(this);
+        modal->show();
+       QObject::connect(modal, &chooseModal::toPlainText,this,&MainWindow::handlePlainText);
 }
