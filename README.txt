@@ -35,7 +35,13 @@ referrence{
     1.qt 5 quick intro http://c.biancheng.net/qt/
     2.qt creator example{
         1.markdown editor 
-        2.textedit example
+        2.qt example:{
+            1.text edit
+            2.markdown editor
+            3.widget web engine guide
+            4. html2pdf
+            5.html file support md language
+        }
     }
 }
 kanban {
