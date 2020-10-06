@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
+#include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,18 +29,8 @@ private slots:
 
     void on_actionSave_triggered();
 
-    void on_actionPrint_triggered();
-
-    void on_actionExit_triggered();
-
-    void on_actionCopy_triggered();
-
-    void on_actionPaste_triggered();
-
-    void on_actionCut_triggered();
-
 private:
     Ui::MainWindow *ui;
-    QString currentFile="";
+    QString currentFile ="";
 };
 #endif // MAINWINDOW_H
