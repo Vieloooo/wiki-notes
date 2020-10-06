@@ -66,6 +66,7 @@
     </property>
     <addaction name="actiontoPDF"/>
     <addaction name="actiontoHTML"/>
+    <addaction name="actionPrint_2"/>
    </widget>
    <widget class="QMenu" name="menuedit">
     <property name="title">
@@ -76,7 +77,6 @@
     <addaction name="actioncut"/>
     <addaction name="actionredo"/>
     <addaction name="actionundo"/>
-    <addaction name="actionchoose_2"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuExport"/>
@@ -125,6 +125,9 @@
    </property>
   </action>
   <action name="action_print">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Print</string>
    </property>
@@ -157,6 +160,11 @@
   <action name="actionchoose_2">
    <property name="text">
     <string>choose</string>
+   </property>
+  </action>
+  <action name="actionPrint_2">
+   <property name="text">
+    <string>Print</string>
    </property>
   </action>
  </widget>

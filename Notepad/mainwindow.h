@@ -39,8 +39,6 @@ private slots:
 
    // void on_actionchoose_triggered();
 
-   // void on_action_print_triggered();
-
     void on_actioncopy_triggered();
 
     void on_actionpaste_triggered();
@@ -52,6 +50,12 @@ private slots:
     void on_actionundo_triggered();
 
     void on_pushButton_clicked();
+
+    void on_actionPrint_2_triggered();
+
+    void on_actiontoPDF_triggered();
+
+    void on_actiontoHTML_triggered();
 
 private:
     QString currentFile ="";

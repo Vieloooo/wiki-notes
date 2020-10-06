@@ -1,6 +1,43 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QAction>
+#include <QApplication>
+#include <QClipboard>
+#include <QColorDialog>
+#include <QComboBox>
+#include <QFontComboBox>
+#include <QFile>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QFontDatabase>
+#include <QMenu>
+#include <QMenuBar>
+#include <QTextCodec>
+#include <QTextEdit>
+#include <QStatusBar>
+#include <QToolBar>
+#include <QTextCursor>
+#include <QTextDocumentWriter>
+#include <QTextList>
+#include <QtDebug>
+#include <QCloseEvent>
+#include <QMessageBox>
+#include <QMimeData>
+#include <QMimeDatabase>
+#if defined(QT_PRINTSUPPORT_LIB)
+#include <QtPrintSupport/qtprintsupportglobal.h>
+#if QT_CONFIG(printer)
+#if QT_CONFIG(printdialog)
+#include <QPrintDialog>
+#endif
+#include <QPrinter>
+#if QT_CONFIG(printpreviewdialog)
+#include <QPrintPreviewDialog>
+#endif
+#endif
+#endif
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -99,4 +136,69 @@ void MainWindow::on_pushButton_clicked()
     chooseModal  *modal = new chooseModal(this);
         modal->show();
        QObject::connect(modal, &chooseModal::toPlainText,this,&MainWindow::handlePlainText);
+}
+
+void MainWindow::on_actionPrint_2_triggered()
+{
+    QPrinter printer;
+
+       printer.setPrinterName("wiki-printer");
+
+       QPrintDialog pDialog(&printer, this);
+        //error callback
+       if(pDialog.exec() == QDialog::Rejected){
+           QMessageBox::warning(this, "Warning", "Cannot Access Printer");
+           return;
+       }
+
+
+       ui->textEdit->print(&printer);
+}
+
+
+void MainWindow::on_actiontoPDF_triggered()
+{
+    QFileDialog fileDialog(this, "Export PDF");
+        fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+        fileDialog.setMimeTypeFilters(QStringList("application/pdf"));
+        fileDialog.setDefaultSuffix("pdf");
+
+        //iferr
+        if (fileDialog.exec() != QDialog::Accepted)
+            return;
+
+        //get pdf filename
+        QString fileName = fileDialog.selectedFiles().first();
+        QPrinter printer(QPrinter::HighResolution);
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setOutputFileName(fileName);
+        //write pdf file
+        ui->textEdit->document()->print(&printer);
+
+        statusBar()->showMessage(tr("Exported \"%1\"")
+                                    .arg(QDir::toNativeSeparators(fileName)));
+}
+
+void MainWindow::on_actiontoHTML_triggered()
+{
+    QFileDialog fileDialog(this, "Export HTML");
+        fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+        fileDialog.setMimeTypeFilters(QStringList("text/html"));
+        fileDialog.setDefaultSuffix("html");
+
+        //iferr
+        if (fileDialog.exec() != QDialog::Accepted)
+            return;
+
+        //new file name
+        QString fileName = fileDialog.selectedFiles().first();
+        QPrinter printer(QPrinter::HighResolution);
+        printer.setOutputFormat(QPrinter::NativeFormat);
+        printer.setOutputFileName(fileName);
+
+         //write it
+        ui->textEdit->document()->print(&printer);
+
+        statusBar()->showMessage(tr("Exported \"%1\"")
+                                    .arg(QDir::toNativeSeparators(fileName)));
 }
