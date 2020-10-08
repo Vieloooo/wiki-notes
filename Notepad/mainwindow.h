@@ -28,6 +28,7 @@ public:
 
 public slots:
     void MainWindow::handlePlainText();
+    void MainWindow::handleHeading1();
 
 private slots:
 
@@ -49,13 +50,15 @@ private slots:
 
     void on_actionundo_triggered();
 
-    void on_pushButton_clicked();
-
     void on_actionPrint_2_triggered();
 
     void on_actiontoPDF_triggered();
 
     void on_actiontoHTML_triggered();
+
+    void on_actiontoMarkdown_triggered();
+
+    void on_actionstyle_triggered();
 
 private:
     QString currentFile ="";

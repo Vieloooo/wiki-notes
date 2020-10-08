@@ -19,11 +19,12 @@ public:
 
 signals:
     void toPlainText();
+    void toHeading1();
 
-public slots:
 
-    void on_toPlain_clicked();
-
+private slots:
+  void on_heading1_clicked();
+  void on_toPlain_clicked();
 private:
     Ui::chooseModal *ui;
 };

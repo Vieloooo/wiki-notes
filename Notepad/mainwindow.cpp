@@ -43,8 +43,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-   // this->setCentralWidget(ui->textEdit);
-    QString initText = "<h1>welcome to Notepad</h1>";
+   this->setCentralWidget(ui->textEdit);
+    QString initText = "<h1>welcome to Notepad</h1><h5>this is a heading5</h5>";
     ui->textEdit->setText(initText);
 
 }
@@ -92,16 +92,10 @@ void MainWindow::on_actionSave_triggered()
     currentFile = fileName;
         setWindowTitle("save"+fileName);
         QTextStream out(&file);
-        QString text = ui->textEdit->toPlainText();
+        QString text = ui->textEdit->toHtml();
         out << text;
         file.close();
 
-}
-
-
-void MainWindow::handlePlainText()
-{
-    ui->textEdit->setText("");
 }
 
 
@@ -131,12 +125,6 @@ void MainWindow::on_actionundo_triggered()
     ui->textEdit->undo();
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    chooseModal  *modal = new chooseModal(this);
-        modal->show();
-       QObject::connect(modal, &chooseModal::toPlainText,this,&MainWindow::handlePlainText);
-}
 
 void MainWindow::on_actionPrint_2_triggered()
 {
@@ -201,4 +189,88 @@ void MainWindow::on_actiontoHTML_triggered()
 
         statusBar()->showMessage(tr("Exported \"%1\"")
                                     .arg(QDir::toNativeSeparators(fileName)));
+}
+
+void MainWindow::on_actiontoMarkdown_triggered()
+{
+
+        //fuc 1, need to input suffix .md
+        QFileDialog fileDialog(this, "Export Markdown");
+
+        //new file name
+        QString fileName = fileDialog.getSaveFileName();
+        fileDialog.setDefaultSuffix("md");
+        QFile file(fileName);
+
+        if (!file.open(QFile::WriteOnly | QFile::Text)) {
+               QMessageBox::warning(this, "Warning", "Cannot save file: " + file.errorString());
+               return;
+           }
+        setWindowTitle("saveMarkdown"+fileName);
+        QTextStream out(&file);
+        QString text = ui->textEdit->toMarkdown();
+        out << text;
+        file.close();
+
+
+    /* fuc2 with some error ,device not open
+    QFileDialog fileDialog(this, "Export MD");
+        fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+        fileDialog.setMimeTypeFilters(QStringList("text/markdown"));
+        fileDialog.setDefaultSuffix("md");
+
+        //iferr
+        if (fileDialog.exec() != QDialog::Accepted)
+            return;
+
+        //new file name
+        QString fileName = fileDialog.selectedFiles().first();
+        QFile file(fileName);
+        QTextStream out(&file);
+        QString text = ui->textEdit->toMarkdown();
+        out << text;
+        file.close();
+
+        */
+}
+
+void MainWindow::handlePlainText()
+{
+    ui->textEdit->toPlainText();
+         //ui->textEdit->setText("");
+}
+
+void MainWindow::handleHeading1()
+{
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.beginEditBlock();
+
+    QTextBlockFormat blockFmt = cursor.blockFormat();
+
+    blockFmt.setHeadingLevel(1);
+
+    QTextCharFormat fmt;
+           fmt.setFontWeight(1 ? QFont::Bold : QFont::Normal);
+           fmt.setProperty(QTextFormat::FontSizeAdjustment, 3);
+           cursor.select(QTextCursor::LineUnderCursor);
+           cursor.mergeCharFormat(fmt);
+           ui->textEdit->mergeCurrentCharFormat(fmt);
+
+    cursor.setBlockFormat(blockFmt);
+    cursor.endEditBlock();
+
+    //success setting the tag to h5 and updating  the style
+     //ui->textEdit->setText("");
+
+}
+
+
+void MainWindow::on_actionstyle_triggered()
+{
+    chooseModal  *modal = new chooseModal(this);
+        modal->show();
+       QObject::connect(modal, &chooseModal::toPlainText,this,&MainWindow::handlePlainText);
+       QObject::connect(modal, &chooseModal::toHeading1,this,&MainWindow::handleHeading1);
+
 }

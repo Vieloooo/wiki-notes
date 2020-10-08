@@ -16,6 +16,13 @@ chooseModal::~chooseModal()
 void chooseModal::on_toPlain_clicked()
 {
     emit toPlainText();
-     connect(this, SIGNAL(toPlainText()) ,this->parent(),SLOT(MainWindow::handlePlainText()));
+    // connect(this, SIGNAL(toPlainText()) ,this->parent(),SLOT(MainWindow::handlePlainText()));
     this->close();
+}
+
+void chooseModal::on_heading1_clicked()
+{
+    emit toHeading1();
+    this->close();
+
 }
