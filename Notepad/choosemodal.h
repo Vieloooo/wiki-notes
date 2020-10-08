@@ -20,11 +20,41 @@ public:
 signals:
     void toPlainText();
     void toHeading1();
+    void toHeading2();
+    void toHeading3();
+    void toRed();
+    void toBlue();
+    void toYellow();
+    void toRedBackground();
+    void toBlueBackground();
+    void toYellowBackground();
+    void toPara();
+
 
 
 private slots:
   void on_heading1_clicked();
+
   void on_toPlain_clicked();
+
+  void on_heading2_clicked();
+
+  void on_heading3_clicked();
+
+  void on_red_clicked();
+
+  void on_blue_clicked();
+
+  void on_yellow_clicked();
+
+  void on_redBackground_clicked();
+
+  void on_blueBackground_clicked();
+
+  void on_yellowbackground_clicked();
+
+  void on_Para_clicked();
+
 private:
     Ui::chooseModal *ui;
 };

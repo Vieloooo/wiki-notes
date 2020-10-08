@@ -28,7 +28,27 @@ public:
 
 public slots:
     void MainWindow::handlePlainText();
+
     void MainWindow::handleHeading1();
+
+    void MainWindow::handleHeading2();
+
+    void MainWindow::handleHeading3();
+
+    void MainWindow::handleRed();
+
+    void MainWindow::handleBlue();
+
+    void MainWindow::handleYellow();
+
+    void MainWindow::handleRedBackground();
+
+    void MainWindow::handleBlueBackground();
+
+    void MainWindow::handleYellowBackground();
+
+    void MainWindow::handlePara();
+
 
 private slots:
 

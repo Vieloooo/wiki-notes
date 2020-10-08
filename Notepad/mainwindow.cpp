@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include <QAction>
 #include <QApplication>
 #include <QClipboard>
@@ -25,6 +24,7 @@
 #include <QMessageBox>
 #include <QMimeData>
 #include <QMimeDatabase>
+#include <QBrush>
 #if defined(QT_PRINTSUPPORT_LIB)
 #include <QtPrintSupport/qtprintsupportglobal.h>
 #if QT_CONFIG(printer)
@@ -44,7 +44,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
    this->setCentralWidget(ui->textEdit);
-    QString initText = "<h1>welcome to Notepad</h1><h5>this is a heading5</h5>";
+    QString initText = "<h1>Welcome to Wiki-Note</h1>"
+                       "<h3>A HTML based editing tool with Mindmap.</h3>";
     ui->textEdit->setText(initText);
 
 }
@@ -169,6 +170,8 @@ void MainWindow::on_actiontoPDF_triggered()
 
 void MainWindow::on_actiontoHTML_triggered()
 {
+    //unreadable fuc1
+    /*
     QFileDialog fileDialog(this, "Export HTML");
         fileDialog.setAcceptMode(QFileDialog::AcceptSave);
         fileDialog.setMimeTypeFilters(QStringList("text/html"));
@@ -189,6 +192,27 @@ void MainWindow::on_actiontoHTML_triggered()
 
         statusBar()->showMessage(tr("Exported \"%1\"")
                                     .arg(QDir::toNativeSeparators(fileName)));
+        */
+
+    //fuc 2, need to input suffix .html
+    QFileDialog fileDialog(this, "Export Html");
+
+    //new file name
+    QString fileName = fileDialog.getSaveFileName();
+    fileDialog.setDefaultSuffix("html");
+    QFile file(fileName);
+
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+           QMessageBox::warning(this, "Warning", "Cannot save file: " + file.errorString());
+           return;
+       }
+    setWindowTitle("saveHtml"+fileName);
+    QTextStream out(&file);
+    QString text = ui->textEdit->toHtml();
+    out << text;
+    file.close();
+
+
 }
 
 void MainWindow::on_actiontoMarkdown_triggered()
@@ -265,12 +289,188 @@ void MainWindow::handleHeading1()
 
 }
 
+void MainWindow::handleHeading2()
+{
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.beginEditBlock();
+
+    QTextBlockFormat blockFmt = cursor.blockFormat();
+
+    blockFmt.setHeadingLevel(2);
+    QTextCharFormat fmt;
+           fmt.setFontWeight(2 ? QFont::Bold : QFont::Normal);
+           fmt.setProperty(QTextFormat::FontSizeAdjustment, 2);
+           cursor.select(QTextCursor::LineUnderCursor);
+           cursor.mergeCharFormat(fmt);
+           ui->textEdit->mergeCurrentCharFormat(fmt);
+
+    cursor.setBlockFormat(blockFmt);
+    cursor.endEditBlock();
+     //ui->textEdit->setText("");
+
+}
+
+void MainWindow::handleHeading3()
+{
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.beginEditBlock();
+
+    QTextBlockFormat blockFmt = cursor.blockFormat();
+
+    blockFmt.setHeadingLevel(3);
+    QTextCharFormat fmt;
+           fmt.setFontWeight(3 ? QFont::Bold : QFont::Normal);
+           fmt.setProperty(QTextFormat::FontSizeAdjustment, 1);
+           cursor.select(QTextCursor::LineUnderCursor);
+           cursor.mergeCharFormat(fmt);
+           ui->textEdit->mergeCurrentCharFormat(fmt);
+
+    cursor.setBlockFormat(blockFmt);
+    cursor.endEditBlock();
+
+
+}
+
+void MainWindow::handlePara()
+{
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.beginEditBlock();
+
+    QTextBlockFormat blockFmt = cursor.blockFormat();
+
+    blockFmt.setHeadingLevel(0);
+    QTextCharFormat fmt;
+           fmt.setFontWeight(0 ? QFont::Bold : QFont::Normal);
+           fmt.setProperty(QTextFormat::FontSizeAdjustment, 0);
+           cursor.select(QTextCursor::LineUnderCursor);
+           cursor.mergeCharFormat(fmt);
+           ui->textEdit->mergeCurrentCharFormat(fmt);
+
+    cursor.setBlockFormat(blockFmt);
+    cursor.endEditBlock();
+
+
+}
+
 
 void MainWindow::on_actionstyle_triggered()
 {
     chooseModal  *modal = new chooseModal(this);
+    modal->setWindowTitle("Style");
         modal->show();
        QObject::connect(modal, &chooseModal::toPlainText,this,&MainWindow::handlePlainText);
        QObject::connect(modal, &chooseModal::toHeading1,this,&MainWindow::handleHeading1);
+       QObject::connect(modal, &chooseModal::toHeading2,this,&MainWindow::handleHeading2);
+       QObject::connect(modal, &chooseModal::toHeading3,this,&MainWindow::handleHeading3);
+       QObject::connect(modal, &chooseModal::toPara,this,&MainWindow::handlePara);
+       QObject::connect(modal, &chooseModal::toRed,this,&MainWindow::handleRed);
+       QObject::connect(modal, &chooseModal::toBlue,this,&MainWindow::handleBlue);
+       QObject::connect(modal, &chooseModal::toYellow,this,&MainWindow::handleYellow);
+       QObject::connect(modal, &chooseModal::toRedBackground,this,&MainWindow::handleRedBackground);
+       QObject::connect(modal, &chooseModal::toBlueBackground,this,&MainWindow::handleBlueBackground);
+       QObject::connect(modal, &chooseModal::toYellowBackground,this,&MainWindow::handleYellowBackground);
 
+}
+
+
+
+void MainWindow::handleRed()
+{
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.beginEditBlock();
+
+    QTextBlockFormat blockFmt = cursor.blockFormat();
+    QTextCharFormat fmt;
+    fmt.setForeground(QColor(210, 55, 10,230));
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.mergeCharFormat(fmt);
+    ui->textEdit->mergeCurrentCharFormat(fmt);
+    cursor.setBlockFormat(blockFmt);
+    cursor.endEditBlock();
+}
+
+void MainWindow::handleBlue()
+{
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.beginEditBlock();
+
+    QTextBlockFormat blockFmt = cursor.blockFormat();
+    QTextCharFormat fmt;
+    fmt.setForeground(QColor(0, 172, 230,200));
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.mergeCharFormat(fmt);
+    ui->textEdit->mergeCurrentCharFormat(fmt);
+    cursor.setBlockFormat(blockFmt);
+    cursor.endEditBlock();
+}
+
+void MainWindow::handleYellow()
+{
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.beginEditBlock();
+
+    QTextBlockFormat blockFmt = cursor.blockFormat();
+    QTextCharFormat fmt;
+
+    fmt.setBackground(QColor(255, 209, 77,200));
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.mergeCharFormat(fmt);
+    ui->textEdit->mergeCurrentCharFormat(fmt);
+    cursor.setBlockFormat(blockFmt);
+    cursor.endEditBlock();
+}
+
+void MainWindow::handleRedBackground()
+{
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.beginEditBlock();
+
+    QTextBlockFormat blockFmt = cursor.blockFormat();
+    QTextCharFormat fmt;
+    fmt.setForeground(QColor(210, 55, 10,230));
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.mergeCharFormat(fmt);
+    ui->textEdit->mergeCurrentCharFormat(fmt);
+    cursor.setBlockFormat(blockFmt);
+    cursor.endEditBlock();
+}
+
+void MainWindow::handleBlueBackground()
+{
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.beginEditBlock();
+
+    QTextBlockFormat blockFmt = cursor.blockFormat();
+    QTextCharFormat fmt;
+    fmt.setBackground(QColor(0, 172, 230,60));
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.mergeCharFormat(fmt);
+    ui->textEdit->mergeCurrentCharFormat(fmt);
+    cursor.setBlockFormat(blockFmt);
+    cursor.endEditBlock();
+}
+
+void MainWindow::handleYellowBackground()
+{
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.beginEditBlock();
+
+    QTextBlockFormat blockFmt = cursor.blockFormat();
+    QTextCharFormat fmt;
+
+    fmt.setBackground(QColor(255, 209, 77,50));
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.mergeCharFormat(fmt);
+    ui->textEdit->mergeCurrentCharFormat(fmt);
+    cursor.setBlockFormat(blockFmt);
+    cursor.endEditBlock();
 }

@@ -11,5 +11,10 @@
         <file>imgs/Icons/Save.bmp</file>
         <file>imgs/Icons/Sticky.bmp</file>
         <file>imgs/Icons/Turtle.png</file>
+        <file>imgs/Icons/mainIcon.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>imgs/Icons/mainIcon.png</file>
+    </qresource>
+    <qresource prefix="/notes"/>
 </RCC>

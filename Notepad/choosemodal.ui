@@ -13,6 +13,7 @@
   <property name="font">
    <font>
     <family>Arial</family>
+    <pointsize>10</pointsize>
     <weight>50</weight>
     <bold>false</bold>
    </font>
@@ -30,10 +31,18 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>20</y>
-     <width>93</width>
-     <height>28</height>
+     <y>17</y>
+     <width>91</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
    </property>
    <property name="text">
     <string>toplain</string>
@@ -43,49 +52,81 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>60</y>
+     <y>50</y>
      <width>93</width>
      <height>28</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
    </property>
    <property name="text">
     <string>heading1</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="heading2">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>90</y>
+     <y>80</y>
      <width>93</width>
      <height>28</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
    </property>
    <property name="text">
     <string>heading2</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="heading3">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>130</y>
+     <x>10</x>
+     <y>110</y>
      <width>93</width>
      <height>28</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
    </property>
    <property name="text">
     <string>heading3</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="Para">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>160</y>
+     <y>140</y>
      <width>93</width>
      <height>28</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
    </property>
    <property name="text">
     <string>p</string>
@@ -94,14 +135,100 @@
   <widget class="QPushButton" name="pushButton_5">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>210</y>
+     <x>10</x>
+     <y>170</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>list</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="red">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>20</y>
      <width>93</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>list</string>
+    <string>Red</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="blue">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>50</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Blue</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="yellow">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>80</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Yellow</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="redBackground">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>120</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>RedBack</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="blueBackground">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>150</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>BlueBack</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="yellowbackground">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>180</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>YellowBack</string>
    </property>
   </widget>
  </widget>
