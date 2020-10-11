@@ -49,6 +49,12 @@ public slots:
 
     void MainWindow::handlePara();
 
+    void MainWindow::handleDiv();
+
+    void MainWindow::handleBullet();
+
+    void MainWindow::handleCircle();
+
 
 private slots:
 
@@ -79,6 +85,8 @@ private slots:
     void on_actiontoMarkdown_triggered();
 
     void on_actionstyle_triggered();
+
+
 
 private:
     QString currentFile ="";

@@ -84,3 +84,21 @@ void chooseModal::on_Para_clicked()
     emit toPara();
     this->close();
 }
+
+void chooseModal::on_Div_clicked()
+{
+    emit toDiv();
+    this->close();
+}
+
+void chooseModal::on_pushButton_5_clicked()
+{
+    emit toBulletList();
+    this->close();
+}
+
+void chooseModal::on_circleList_clicked()
+{
+    emit toCircleList();
+    this->close();
+}

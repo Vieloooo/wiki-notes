@@ -29,6 +29,9 @@ signals:
     void toBlueBackground();
     void toYellowBackground();
     void toPara();
+    void toDiv();
+    void toBulletList();
+    void toCircleList();
 
 
 
@@ -54,6 +57,12 @@ private slots:
   void on_yellowbackground_clicked();
 
   void on_Para_clicked();
+
+  void on_Div_clicked();
+
+  void on_pushButton_5_clicked();
+
+  void on_circleList_clicked();
 
 private:
     Ui::chooseModal *ui;

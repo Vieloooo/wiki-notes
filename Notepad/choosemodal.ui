@@ -150,7 +150,7 @@
     </font>
    </property>
    <property name="text">
-    <string>list</string>
+    <string>Dotlist</string>
    </property>
   </widget>
   <widget class="QPushButton" name="red">
@@ -229,6 +229,32 @@
    </property>
    <property name="text">
     <string>YellowBack</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Div">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>20</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>div</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="circleList">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>200</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>circlelist</string>
    </property>
   </widget>
  </widget>

@@ -372,6 +372,10 @@ void MainWindow::on_actionstyle_triggered()
        QObject::connect(modal, &chooseModal::toRedBackground,this,&MainWindow::handleRedBackground);
        QObject::connect(modal, &chooseModal::toBlueBackground,this,&MainWindow::handleBlueBackground);
        QObject::connect(modal, &chooseModal::toYellowBackground,this,&MainWindow::handleYellowBackground);
+       QObject::connect(modal, &chooseModal::toDiv,this,&MainWindow::handleDiv);
+       QObject::connect(modal, &chooseModal::toBulletList,this,&MainWindow::handleBullet);
+       QObject::connect(modal, &chooseModal::toCircleList,this,&MainWindow::handleCircle);
+
 
 }
 
@@ -434,7 +438,7 @@ void MainWindow::handleRedBackground()
 
     QTextBlockFormat blockFmt = cursor.blockFormat();
     QTextCharFormat fmt;
-    fmt.setForeground(QColor(210, 55, 10,230));
+    fmt.setBackground(QColor(210, 55, 10,80));
     cursor.select(QTextCursor::LineUnderCursor);
     cursor.mergeCharFormat(fmt);
     ui->textEdit->mergeCurrentCharFormat(fmt);
@@ -463,14 +467,69 @@ void MainWindow::handleYellowBackground()
 
     QTextCursor cursor = ui->textEdit->textCursor();
     cursor.beginEditBlock();
-
     QTextBlockFormat blockFmt = cursor.blockFormat();
     QTextCharFormat fmt;
 
-    fmt.setBackground(QColor(255, 209, 77,50));
+    fmt.setBackground(QColor(255, 209, 77,70));
     cursor.select(QTextCursor::LineUnderCursor);
     cursor.mergeCharFormat(fmt);
     ui->textEdit->mergeCurrentCharFormat(fmt);
     cursor.setBlockFormat(blockFmt);
     cursor.endEditBlock();
+}
+
+void MainWindow::handleDiv()
+{
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    QString originText = cursor.selectedText();
+    cursor.beginEditBlock();
+    cursor.insertBlock();
+    //originText.toHtmlEscaped();
+   // QString divText = "<div>"+originText+"</div>";
+   // cursor.insertHtml(divText);
+
+   // ui->textEdit->setText("");
+}
+
+void MainWindow::handleBullet()
+{
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.beginEditBlock();
+    QTextBlockFormat blockFmt = cursor.blockFormat();
+    QTextListFormat listFmt;
+
+    if (cursor.currentList()) {
+                listFmt = cursor.currentList()->format();
+            } else {
+                listFmt.setIndent(blockFmt.indent() + 1);
+                blockFmt.setIndent(0);
+                cursor.setBlockFormat(blockFmt);
+            }
+            listFmt.setStyle(QTextListFormat::ListDisc);
+            cursor.createList(listFmt);
+
+             cursor.endEditBlock();
+
+}
+
+void MainWindow::handleCircle()
+{
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.beginEditBlock();
+    QTextBlockFormat blockFmt = cursor.blockFormat();
+    QTextListFormat listFmt;
+
+    if (cursor.currentList()) {
+                listFmt = cursor.currentList()->format();
+            } else {
+                listFmt.setIndent(blockFmt.indent() + 1);
+                blockFmt.setIndent(0);
+                cursor.setBlockFormat(blockFmt);
+            }
+            listFmt.setStyle(QTextListFormat::ListCircle);
+            cursor.createList(listFmt);
+
+             cursor.endEditBlock();
+
 }
