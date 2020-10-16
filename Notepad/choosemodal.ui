@@ -28,6 +28,9 @@
    <bool>false</bool>
   </property>
   <widget class="QPushButton" name="toPlain">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -45,7 +48,7 @@
     </font>
    </property>
    <property name="text">
-    <string>toplain</string>
+    <string>PlainText</string>
    </property>
   </widget>
   <widget class="QPushButton" name="heading1">
@@ -129,7 +132,7 @@
     </font>
    </property>
    <property name="text">
-    <string>p</string>
+    <string>P</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_5">
@@ -156,8 +159,8 @@
   <widget class="QPushButton" name="red">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>20</y>
+     <x>140</x>
+     <y>140</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -169,8 +172,8 @@
   <widget class="QPushButton" name="blue">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>50</y>
+     <x>140</x>
+     <y>170</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -182,8 +185,8 @@
   <widget class="QPushButton" name="yellow">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>80</y>
+     <x>140</x>
+     <y>200</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -195,8 +198,8 @@
   <widget class="QPushButton" name="redBackground">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>120</y>
+     <x>270</x>
+     <y>140</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -208,8 +211,8 @@
   <widget class="QPushButton" name="blueBackground">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>150</y>
+     <x>270</x>
+     <y>170</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -221,8 +224,8 @@
   <widget class="QPushButton" name="yellowbackground">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>180</y>
+     <x>270</x>
+     <y>200</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -234,8 +237,8 @@
   <widget class="QPushButton" name="Div">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>20</y>
+     <x>140</x>
+     <y>110</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -255,6 +258,29 @@
    </property>
    <property name="text">
     <string>circlelist</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>132</x>
+     <y>30</y>
+     <width>231</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="searcBut">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>70</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Search</string>
    </property>
   </widget>
  </widget>

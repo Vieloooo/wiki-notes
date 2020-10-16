@@ -27,40 +27,45 @@ public:
     ~MainWindow();
 
     QString jsonfile ="";
+    QString realName="";
 public:
     Ui::MainWindow *ui;
 
 public slots:
-    void MainWindow::handlePlainText();
+    void handlePlainText();
 
-    void MainWindow::handleHeading1();
+    void handleHeading1();
 
-    void MainWindow::handleHeading2();
+    void handleHeading2();
 
-    void MainWindow::handleHeading3();
+    void handleHeading3();
 
-    void MainWindow::handleRed();
+    void handleRed();
 
-    void MainWindow::handleBlue();
+    void handleBlue();
 
-    void MainWindow::handleYellow();
+    void handleYellow();
 
-    void MainWindow::handleRedBackground();
+    void handleRedBackground();
 
-    void MainWindow::handleBlueBackground();
+    void handleBlueBackground();
 
-    void MainWindow::handleYellowBackground();
+    void handleYellowBackground();
 
-    void MainWindow::handlePara();
+    void handlePara();
 
-    void MainWindow::handleDiv();
+    void handleDiv();
 
-    void MainWindow::handleBullet();
+    void handleBullet();
 
-    void MainWindow::handleCircle();
+    void handleCircle();
 
-    void MainWindow::turnToPosition(int posi);
+    void turnToPosition(int posi);
 
+
+    void createJsonFile();
+
+    void handleSearch(QString searchContent);
 
 private slots:
 
@@ -92,7 +97,6 @@ private slots:
 
     void on_actionstyle_triggered();
 
-    void createJsonFile();
 
 
 
@@ -101,4 +105,6 @@ private:
 
 
 };
-#endif // MAINWINDOW_H
+#endif
+
+// MAINWINDOW_H

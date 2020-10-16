@@ -10,8 +10,6 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFontDatabase>
-//#include <QMenu>
-//#include <QMenuBar>
 #include <QTextCodec>
 #include <QTextEdit>
 #include <QStatusBar>
@@ -76,12 +74,16 @@ void MainWindow::on_actionNew_triggered()
            return;
        }
 
+    QFileInfo *fileInfo = new QFileInfo(fileName);
+    realName = fileInfo->baseName();
     currentFile = fileName;
         setWindowTitle("new"+fileName);
         QTextStream out(&file);
         QString text = ui->textEdit->toHtml();
         out << text;
         file.close();
+
+        createJsonFile();
 
 
 }
@@ -384,6 +386,7 @@ void MainWindow::on_actionstyle_triggered()
     chooseModal  *modal = new chooseModal(this);
     modal->setWindowTitle("Style");
         modal->show();
+
        QObject::connect(modal, &chooseModal::toPlainText,this,&MainWindow::handlePlainText);
        QObject::connect(modal, &chooseModal::toHeading1,this,&MainWindow::handleHeading1);
        QObject::connect(modal, &chooseModal::toHeading2,this,&MainWindow::handleHeading2);
@@ -398,6 +401,8 @@ void MainWindow::on_actionstyle_triggered()
        QObject::connect(modal, &chooseModal::toDiv,this,&MainWindow::handleDiv);
        QObject::connect(modal, &chooseModal::toBulletList,this,&MainWindow::handleBullet);
        QObject::connect(modal, &chooseModal::toCircleList,this,&MainWindow::handleCircle);
+
+       QObject::connect(modal, &chooseModal::pleaseSearch,this,&MainWindow::handleSearch);
 
 
 }
@@ -551,9 +556,10 @@ void MainWindow::handleDiv()
     QTextCursor cursor = ui->textEdit->textCursor();
    int abposi = cursor.position();
 
-   MainInfo  *input = new MainInfo(this);
+   MainInfo  *input = new MainInfo(this,abposi,jsonfile);
   input->setWindowTitle("Input the topic of the block");
       input->show();
+
 
 
  //return abposi;
@@ -568,7 +574,80 @@ void MainWindow::turnToPosition(int posi){
     ui->textEdit->setTextCursor(cursor);
 }
 
-void createJsonFile(){
+ void MainWindow::createJsonFile(){
     QJsonObject Ablock;
     QJsonArray Blocks;
+    Ablock.insert("position",0);
+    Ablock.insert("mainInfo","header");
+    Blocks.append(Ablock);
+    qDebug()<<Blocks;
+    QJsonDocument rootDoc;
+    rootDoc.setArray(Blocks);
+    QByteArray rootStr = rootDoc.toJson(QJsonDocument::Compact);
+    QString jsonString(rootStr);
+    qDebug() << jsonString;
+
+    QString fileName = QFileDialog::getSaveFileName(this,"save");
+    QFile file(fileName);
+
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+           QMessageBox::warning(this, "Warning", "Cannot save file: " + file.errorString());
+           return;
+       }
+
+    jsonfile = fileName;
+       // setWindowTitle("save"+fileName);
+        QTextStream out(&file);
+
+        out << jsonString;
+        file.close();
 }
+
+
+ void MainWindow::handleSearch(QString searchContent){
+
+     qDebug()<<searchContent;
+     QTextDocument *document = ui->textEdit->document();
+     bool found = false;
+
+     //
+     document->undo();
+
+     if (searchContent.isEmpty()) {
+         QMessageBox::information(this, tr("Empty Search Field"),
+                                  tr("The search field is empty. "
+                                     "Please enter a word and click Find."));
+     } else {
+         QTextCursor highlightCursor(document);
+         QTextCursor cursor(document);
+
+         cursor.beginEditBlock();
+ //! [6]
+
+         QTextCharFormat plainFormat(highlightCursor.charFormat());
+         QTextCharFormat colorFormat = plainFormat;
+         colorFormat.setForeground(QColor(0, 172, 230,160));
+
+         while (!highlightCursor.isNull() && !highlightCursor.atEnd()) {
+             highlightCursor = document->find(searchContent, highlightCursor,
+                                              QTextDocument::FindWholeWords);
+
+             if (!highlightCursor.isNull()) {
+                 found = true;
+                 highlightCursor.movePosition(QTextCursor::WordRight,
+                                              QTextCursor::KeepAnchor);
+                 highlightCursor.mergeCharFormat(colorFormat);
+             }
+         }
+
+
+         cursor.endEditBlock();
+
+
+         if (found == false) {
+             QMessageBox::information(this, tr("Word Not Found"),
+                                      tr("Sorry, the word cannot be found."));
+         }
+     }
+
+ }

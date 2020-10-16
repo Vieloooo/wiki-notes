@@ -102,3 +102,12 @@ void chooseModal::on_circleList_clicked()
     emit toCircleList();
     this->close();
 }
+
+void chooseModal::on_searcBut_clicked()
+{
+    QString searchContent = ui->lineEdit->text();
+
+    emit pleaseSearch(searchContent);
+
+    this->close();
+}

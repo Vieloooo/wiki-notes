@@ -33,6 +33,8 @@ signals:
     void toBulletList();
     void toCircleList();
 
+    void pleaseSearch(QString searchContent);
+
 
 
 private slots:
@@ -63,6 +65,9 @@ private slots:
   void on_pushButton_5_clicked();
 
   void on_circleList_clicked();
+
+  void on_searcBut_clicked();
+
 
 private:
     Ui::chooseModal *ui;
