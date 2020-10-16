@@ -12,6 +12,8 @@
 
 #include "choosemodal.h"
 
+#include "maininfo.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -23,6 +25,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    QString jsonfile ="";
 public:
     Ui::MainWindow *ui;
 
@@ -55,6 +59,8 @@ public slots:
 
     void MainWindow::handleCircle();
 
+    void MainWindow::turnToPosition(int posi);
+
 
 private slots:
 
@@ -86,10 +92,13 @@ private slots:
 
     void on_actionstyle_triggered();
 
+    void createJsonFile();
+
 
 
 private:
     QString currentFile ="";
+
 
 };
 #endif // MAINWINDOW_H

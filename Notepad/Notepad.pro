@@ -10,15 +10,18 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
+    maininfo.cpp \
     mainwindow.cpp\
     choosemodal.cpp
 
 HEADERS += \
     choosemodal.h \
+    maininfo.h \
     mainwindow.h
 
 FORMS += \
     choosemodal.ui \
+    maininfo.ui \
     mainwindow.ui
 
 # Default rules for deployment.

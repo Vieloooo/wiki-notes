@@ -10,8 +10,8 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFontDatabase>
-#include <QMenu>
-#include <QMenuBar>
+//#include <QMenu>
+//#include <QMenuBar>
 #include <QTextCodec>
 #include <QTextEdit>
 #include <QStatusBar>
@@ -25,6 +25,12 @@
 #include <QMimeData>
 #include <QMimeDatabase>
 #include <QBrush>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+
+
 #if defined(QT_PRINTSUPPORT_LIB)
 #include <QtPrintSupport/qtprintsupportglobal.h>
 #if QT_CONFIG(printer)
@@ -37,6 +43,8 @@
 #endif
 #endif
 #endif
+
+const QString jsonPath =":/Json";
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -60,6 +68,21 @@ void MainWindow::on_actionNew_triggered()
 {
     currentFile.clear();
     ui->textEdit->setText(QString());
+    QString fileName = QFileDialog::getSaveFileName(this,"New");
+    QFile file(fileName);
+
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+           QMessageBox::warning(this, "Warning", "Cannot save file: " + file.errorString());
+           return;
+       }
+
+    currentFile = fileName;
+        setWindowTitle("new"+fileName);
+        QTextStream out(&file);
+        QString text = ui->textEdit->toHtml();
+        out << text;
+        file.close();
+
 
 }
 
@@ -478,19 +501,6 @@ void MainWindow::handleYellowBackground()
     cursor.endEditBlock();
 }
 
-void MainWindow::handleDiv()
-{
-
-    QTextCursor cursor = ui->textEdit->textCursor();
-    QString originText = cursor.selectedText();
-    cursor.beginEditBlock();
-    cursor.insertBlock();
-    //originText.toHtmlEscaped();
-   // QString divText = "<div>"+originText+"</div>";
-   // cursor.insertHtml(divText);
-
-   // ui->textEdit->setText("");
-}
 
 void MainWindow::handleBullet()
 {
@@ -532,4 +542,33 @@ void MainWindow::handleCircle()
 
              cursor.endEditBlock();
 
+}
+
+void MainWindow::handleDiv()
+{
+
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+   int abposi = cursor.position();
+
+   MainInfo  *input = new MainInfo(this);
+  input->setWindowTitle("Input the topic of the block");
+      input->show();
+
+
+ //return abposi;
+
+        qDebug() <<abposi;
+}
+
+void MainWindow::turnToPosition(int posi){
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.setPosition(posi,QTextCursor::MoveAnchor);
+    ui->textEdit->setTextCursor(cursor);
+}
+
+void createJsonFile(){
+    QJsonObject Ablock;
+    QJsonArray Blocks;
 }
