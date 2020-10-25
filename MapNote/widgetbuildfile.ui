@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WidgetBuildFile</class>
+ <widget class="QWidget" name="WidgetBuildFile">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>561</width>
+    <height>409</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QListWidget" name="listWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>541</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Folder</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft Tai Le</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../../Personal/Desktop/icon/folder_.png</normaloff>../../../Personal/Desktop/icon/folder_.png</iconset>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>0</y>
+     <width>371</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Choose the type of file you want to build:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_2">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>40</y>
+     <width>401</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Bahnschrift Light</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>141</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Cambria Math</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>ProjectCreatePath:</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ConfirmButton">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>380</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Confirm</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="CancelButton">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>380</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>110</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Cambria Math</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>FileCreatePath:</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>541</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Folder</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft Tai Le</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../../Personal/Desktop/icon/folder_.png</normaloff>../../../Personal/Desktop/icon/folder_.png</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>TXT</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft Tai Le</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../../Personal/Desktop/icon/txt.png</normaloff>../../../Personal/Desktop/icon/txt.png</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>HTML</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft Tai Le</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../../Personal/Desktop/icon/html.png</normaloff>../../../Personal/Desktop/icon/html.png</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>DOC</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft Tai Le</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../../Personal/Desktop/icon/doc.png</normaloff>../../../Personal/Desktop/icon/doc.png</iconset>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_5">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>110</y>
+     <width>431</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Bahnschrift Light</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_6">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>330</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string> File Type:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_7">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>330</y>
+     <width>471</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_8">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>350</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Filne Name:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_9">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>350</y>
+     <width>461</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>957</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="widget2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>291</width>
+      <height>541</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>359</x>
+      <y>9</y>
+      <width>581</width>
+      <height>561</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QTextEdit" name="textEdit">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+        </font>
+       </property>
+       <property name="locale">
+        <locale language="English" country="UnitedStates"/>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhMultiLine</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>957</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+   </widget>
+   <widget class="QMenu" name="menuExport">
+    <property name="title">
+     <string>Export</string>
+    </property>
+    <addaction name="actiontoPDF"/>
+    <addaction name="actiontoHTML"/>
+    <addaction name="actionPrint_2"/>
+    <addaction name="actiontoMarkdown"/>
+   </widget>
+   <widget class="QMenu" name="menuedit">
+    <property name="title">
+     <string>edit</string>
+    </property>
+    <addaction name="actioncopy"/>
+    <addaction name="actionpaste"/>
+    <addaction name="actioncut"/>
+    <addaction name="actionredo"/>
+    <addaction name="actionundo"/>
+    <addaction name="actionstyle"/>
+   </widget>
+   <widget class="QMenu" name="menuMap">
+    <property name="title">
+     <string>Map</string>
+    </property>
+    <addaction name="actionMap"/>
+    <addaction name="actionFile"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuExport"/>
+   <addaction name="menuedit"/>
+   <addaction name="menuMap"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionNew">
+   <property name="text">
+    <string>New</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="text">
+    <string>Print</string>
+   </property>
+  </action>
+  <action name="actiontoPDF">
+   <property name="text">
+    <string>toPDF</string>
+   </property>
+  </action>
+  <action name="actiontoHTML">
+   <property name="text">
+    <string>toHTML</string>
+   </property>
+  </action>
+  <action name="actionchoose">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>choose</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+/</string>
+   </property>
+  </action>
+  <action name="action_print">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+  </action>
+  <action name="actioncopy">
+   <property name="text">
+    <string>copy</string>
+   </property>
+  </action>
+  <action name="actionpaste">
+   <property name="text">
+    <string>paste</string>
+   </property>
+  </action>
+  <action name="actioncut">
+   <property name="text">
+    <string>cut</string>
+   </property>
+  </action>
+  <action name="actionredo">
+   <property name="text">
+    <string>redo</string>
+   </property>
+  </action>
+  <action name="actionundo">
+   <property name="text">
+    <string>undo</string>
+   </property>
+  </action>
+  <action name="actionchoose_2">
+   <property name="text">
+    <string>choose</string>
+   </property>
+  </action>
+  <action name="actionPrint_2">
+   <property name="text">
+    <string>Print</string>
+   </property>
+  </action>
+  <action name="actiontoMarkdown">
+   <property name="text">
+    <string>toMarkdown</string>
+   </property>
+  </action>
+  <action name="actionstyle">
+   <property name="text">
+    <string>style</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+/</string>
+   </property>
+  </action>
+  <action name="actionShow_map">
+   <property name="text">
+    <string>Show map</string>
+   </property>
+  </action>
+  <action name="actionMap">
+   <property name="text">
+    <string>Map</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+M</string>
+   </property>
+  </action>
+  <action name="actionFile">
+   <property name="text">
+    <string>File</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
