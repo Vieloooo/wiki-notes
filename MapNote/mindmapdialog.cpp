@@ -7,13 +7,26 @@
 #include "nodeinfodialog.h"
 #include "aboutdialog.h"
 
+#include "uabiruana.h"
 
-MindMapDialog::MindMapDialog(QWidget *parent) :
+int CurrentNodeNumber;
+
+MindMapDialog::MindMapDialog(QWidget *parent,QString HtmlPath) :
     QWidget(parent)
 {
+
     this->setWindowFlags(Qt::Window);
     this->resize(1268, 744);
+
+
+    //read path
+
+    QFileInfo *fileinfo = new QFileInfo(HtmlPath);
+ QString realName= fileinfo->baseName();
+    jsonPath +="/"+ realName +".json";
+    mapPath += "/"+ realName +".txt";
 //设置窗口大小
+
     initMindMapDialog();
     createActions();
 
@@ -29,7 +42,7 @@ MindMapDialog::~MindMapDialog()
 
 void MindMapDialog::initMindMapDialog()
 {
-    m_scene = new Scene(0, 0, 50000, 60000);
+    m_scene = new Scene(0, 0, 500, 600);
     connect(m_scene, SIGNAL(updateContextMenu()), this, SLOT(onSceneUpdateContextMenu()));
     m_view = new QGraphicsView(this);
     m_view->setScene(m_scene);
@@ -117,6 +130,15 @@ void MindMapDialog::createActions()
 
     m_topMenu->addSeparator();
 
+    m_actOpen= new QAction ("Open",this);
+    connect(m_actOpen, SIGNAL(triggered(bool)),this,SLOT(onOpen()));
+    m_topMenu->addAction(m_actOpen);
+
+    m_topMenu->addSeparator();
+
+    m_actSend = new QAction ("Send",this);
+    connect(m_actSend, SIGNAL(triggered(bool)),this,SLOT(onSend()));
+    m_topMenu->addAction(m_actSend);
 
 }
 //鼠标右键事件的定义
@@ -722,24 +744,38 @@ void MindMapDialog::onAbout()
     aboutDlg->exec();
 }
 
-void MindMapDialog::onSave(){
+void MindMapDialog::onSave( ){
 
     QString str;
-    QFile f(MindGraphSavePath);
+
+    QFile f(mapPath);
     f.open(QIODevice::WriteOnly | QIODevice::Text ); //以只写的方式
     QTextStream txtOutput(&f);
-    for(int i=0;i<TreeNode.size();i++){  // num x y father string
-        str = QString::number(TreeNode[i]->num,10)+" "+QString::number(TreeNode[i]->locatex,10)+" "+QString::number(TreeNode[i]->locatey,10)+" "+QString::number(TreeNode[i]->father,10)+" "+TreeNode[i]->CurrentText;
+    for(int i=0;i<TreeNode.size();i++){  // num x y father position string
+        str = QString::number(TreeNode[i]->num,10)+" "+QString::number(TreeNode[i]->locatex,10)+" "+QString::number(TreeNode[i]->locatey,10)+" "+QString::number(TreeNode[i]->father,10)+" "+QString::number(TreeNode[i]->position,10)+" "+TreeNode[i]->CurrentText;
         txtOutput << str <<"\n";
     }
     f.close();
 
 }
 
+void MindMapDialog::onOpen(){
+
+    UabiruanA *jsonlist  = new UabiruanA(0, jsonPath);
+    Node *n = getSelectedNode();
+    if(n){
+        CurrentNodeNumber = n->toolTip().toInt();
+        jsonlist->show();
+        connect(jsonlist, &UabiruanA::writePosi,this,&MindMapDialog::handlePosition);
+    }
+
+
+}
 void MindMapDialog::onShow(){
 
     QString context;
-    QFile f(MindGraphSavePath);
+    QFile f(mapPath);
+    qDebug()<<mapPath +"map path begin ";
     f.open(QIODevice::ReadOnly | QIODevice::Text);
     QTextStream txtInput(&f);
     while(!txtInput.atEnd())
@@ -750,8 +786,9 @@ void MindMapDialog::onShow(){
         int lx = strlist[1].toInt();
         int ly = strlist[2].toInt();
         int father = strlist[3].toInt();
+        int position = strlist[4].toInt();
         QString content;
-        if(strlist.size() == 5) content = strlist[4];
+        if(strlist.size() == 6) content = strlist[5];
 
         if(father == num){
             Node *node = new Node(this);
@@ -763,6 +800,7 @@ void MindMapDialog::onShow(){
             node->locatex = lx;
             node->locatey = ly;
             node->father = father;
+            node->position = position;
             node->CurrentText =content;
             node->setText(content);
             node->setToolTip(QString::number(num,10));
@@ -790,6 +828,7 @@ void MindMapDialog::onShow(){
                     node->locatex = -1;
                     node->locatey = -1;
                     node->father = father;
+                    node->position = position;
                     node->CurrentText =content;
                     node->setText(content);
                     TreeNode.push_back(node);
@@ -818,6 +857,7 @@ void MindMapDialog::onShow(){
                             node->locatex = -1;
                             node->locatey = -1;
                             node->father = father;
+                            node->position = position;
                             node->CurrentText =content;
                             node->setText(content);
                             TreeNode.push_back(node);
@@ -844,5 +884,21 @@ void MindMapDialog::onShow(){
     }
 
 
+}
 
+
+void MindMapDialog::handlePosition(int position){
+    qDebug()<<position;
+    TreeNode[CurrentNodeNumber]->position = position;
+}
+
+void MindMapDialog::onSend(){
+    Node *n =getSelectedNode();
+    CurrentNodeNumber = n->num;
+    qDebug()<<"the node is "+ QString::number(CurrentNodeNumber,10);
+    int currentPosi = TreeNode[CurrentNodeNumber]->position;
+qDebug()<<"the node is "+ QString::number(CurrentNodeNumber,10);
+    qDebug()<<"the posi is " + QString::number(currentPosi,10);
+    emit toPosition(currentPosi);
+  //  this->close();
 }

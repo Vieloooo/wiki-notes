@@ -14,6 +14,7 @@ SOURCES += \
     mainwindow.cpp\
     choosemodal.cpp\
     deletewidget.cpp \
+    uabiruana.cpp \
     widget.cpp \
     widgetbuildfile.cpp\
     mindmapdialog.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     choosemodal.h \
     maininfo.h \
     deletewidget.h \
+    uabiruana.h \
     widget.h \
     widgetbuildfile.h\
     mainwindow.h\
@@ -46,6 +48,7 @@ FORMS += \
     maininfo.ui \
     mainwindow.ui\
     deletewidget.ui \
+    uabiruana.ui \
     widget.ui \
     widgetbuildfile.ui
 

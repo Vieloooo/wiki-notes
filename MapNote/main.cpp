@@ -7,16 +7,16 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     //MainWindow textModule;
-   //Widget fileModule;
-   MindMapDialog mapModule;
+   Widget fileModule;
+   //MindMapDialog mapModule;
 
     //textModule.setWindowTitle("Wiki-note");
     //textModule.show();
     //connect(*fileModule,)
-    mapModule.show();
+   // mapModule.show();
 
         //fileModule.resize(40,600);
-   // fileModule.show();
+    fileModule.show();
 
 
     return a.exec();

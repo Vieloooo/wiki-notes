@@ -14,7 +14,7 @@ public:
     ~Node();
 
     //基本存储信息
-    int num,locatex,locatey,father;
+    int num,locatex,locatey,father,position=-1;
     QString CurrentText;
     //析构函数
 

@@ -27,12 +27,14 @@ class MindMapDialog : public QWidget
 //宏，发送信号时自动调用槽
 
 public:
-    explicit MindMapDialog(QWidget *parent = 0);
-//显示调用
+    explicit MindMapDialog(QWidget *parent = 0,QString HtmlPath= "");
+    //显示调用
 
     ~MindMapDialog();
-//析构函数
+    QString mapPath="C:/Users/vielo/Documents/QtProjects/MapNote/map";
+    QString jsonPath="C:/Users/vielo/Documents/QtProjects/MapNote/Json";
 
+    //析构函数
     void initMindMapDialog();
     void createActions();
     void initViewActions();
@@ -44,15 +46,17 @@ public:
     void adjustNodesByLinkFrom(Link *linkFrom, int nodeY);
 
     void itemsMove();
+    QString MindGraphSavePath = "C:/Users/vielo/Documents/QtProjects/MapNote/map";
 
 
-    QString MindGraphSavePath = "C:\\Users\\Administrator\\Desktop\\12.txt";
+
 private:
     QGraphicsView  *m_view;
     Scene          *m_scene;
 
     QMenu          *m_topMenu;
-//菜单栏里面菜单，可以显示文本和图标，但是并不负责执行操作，类似label
+    QMenu          *m_secMenu;
+    //菜单栏里面菜单，可以显示文本和图标，但是并不负责执行操作，类似label
 
     QAction        *m_actAdd;
     QAction        *m_actDel;
@@ -65,8 +69,8 @@ private:
     QAction        *m_actProperty;
     QAction        *m_actAbout;
     QAction        *m_actSave;
-
-
+    QAction        *m_actOpen;
+    QAction        *m_actSend;
 //  QAction类提供了抽象的用户界面action
 
     QQueue<Node *>  m_nodeQueue;
@@ -92,9 +96,13 @@ public slots:
     void onAbout();
     void onSave();
     void onShow();
+    void onOpen();
+    void handlePosition(int position);
+    void onSend();
 
+signals:
+    void toPosition(int posi);
 };
-
 
 
 

@@ -15,10 +15,10 @@ MainInfo::MainInfo(QWidget *parent,int posi , QString jsonName) :
     ui->setupUi(this);
     jsonFile = jsonName;
     position =posi;
-
+    qDebug()<<jsonName+"     &&& this is in main info";
     QFile file(jsonName);
     if (!file.open(QIODevice::ReadOnly | QFile::Text)) {
-           QMessageBox::warning(this, "Warning", "Cannot open file: " + file.errorString());
+           QMessageBox::warning(this, "Warning", "Cannot open file: ") ;
            return;
        }
     QTextStream in(&file);

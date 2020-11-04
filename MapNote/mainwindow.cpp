@@ -29,7 +29,7 @@
 #include <QJsonValue>
 #include <widget.h>
 #include <mindmapdialog.h>
-
+#include "widget.h"
 #if defined(QT_PRINTSUPPORT_LIB)
 #include <QtPrintSupport/qtprintsupportglobal.h>
 #if QT_CONFIG(printer)
@@ -49,11 +49,18 @@ MainWindow::MainWindow(QWidget *parent,QString path)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    currentFile= path;
+
   this->setCentralWidget(ui->textEdit);
 
     QString initText = "<h1>Welcome to Wiki-Note</h1>"
                        "<h3>A HTML based editing tool with Mindmap.</h3>";
 
+
+            QFileInfo *fileinfo = new QFileInfo(path);
+         QString realName= fileinfo->baseName();
+            jsonfile +="/"+ realName +".json";
+            qDebug()<<jsonfile;
    // ui->textEdit->setText(initText);
     handleOpen(path);
 
@@ -71,7 +78,7 @@ void MainWindow::on_actionNew_triggered()
 {
     currentFile.clear();
     ui->textEdit->setText(QString());
-    QString fileName = QFileDialog::getSaveFileName(this,"New");
+    QString fileName = QFileDialog::getSaveFileName(this,"New",currentFile);
     QFile file(fileName);
 
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
@@ -112,7 +119,7 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionSave_triggered()
 {
-    QString fileName = QFileDialog::getSaveFileName(this,"save");
+    QString fileName = QFileDialog::getSaveFileName(this,"save",currentFile);
     QFile file(fileName);
 
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
@@ -562,6 +569,8 @@ void MainWindow::handleDiv()
    int abposi = cursor.position();
 
    MainInfo  *input = new MainInfo(this,abposi,jsonfile);
+
+   qDebug()<<jsonfile;
   input->setWindowTitle("Input the topic of the block");
       input->show();
 
@@ -574,9 +583,13 @@ void MainWindow::handleDiv()
 
 void MainWindow::turnToPosition(int posi){
 
-    QTextCursor cursor = ui->textEdit->textCursor();
-    cursor.setPosition(posi,QTextCursor::MoveAnchor);
-    ui->textEdit->setTextCursor(cursor);
+    qDebug()<< posi;
+    if(posi>0){
+        QTextCursor cursor = ui->textEdit->textCursor();
+        cursor.setPosition(posi,QTextCursor::MoveAnchor);
+        ui->textEdit->setTextCursor(cursor);
+    }
+
 }
 
 

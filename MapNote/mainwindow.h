@@ -26,7 +26,7 @@ public:
     MainWindow(QWidget *parent = nullptr,QString path = "");
     ~MainWindow();
 
-    QString jsonfile ="";
+    QString jsonfile ="C:/Users/vielo/Documents/QtProjects/MapNote/Json";
     QString realNameWithoutSuffix="";
 
     //eternal path

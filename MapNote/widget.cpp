@@ -5,8 +5,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <QWidget>
 #include <mainwindow.h>
+
+#include <mindmapdialog.h>
+
 using namespace std;
 /**----------------KMP Alogrithem for searching file ---------------------------------*/
 vector<int> GetNext(QString p)
@@ -110,8 +113,10 @@ Widget::Widget(QWidget *parent)
     ui->SearchComboBox->setEditable(true);
     //初始化搜索结果显示框
     InitTableWidget();
+
+
     //按钮状态设置
-    ui->SearchButton->setStyleSheet("background:transparent;border-width:0;border-style:outset");
+   //ui->SearchButton->setStyleSheet("background:transparent;border-width:0;border-style:outset");
     ui->SearchButton->setShortcut(tr("Ctrl+f"));
     ui->SearchButton->setToolTip("Ctrl+F");
     //RenameBoxInitialize
@@ -289,8 +294,15 @@ void Widget::on_treeView_2_doubleClicked(const QModelIndex &index)
        // QDesktopServices::openUrl(QUrl(CreatePath1));
         //
         MainWindow *textComponents = new MainWindow(this,CreatePath1);
+        textComponents->setGeometry(200,280,600,700);
         textComponents->show();
         //open text module;
+        //open map module
+        MindMapDialog *mapComponent = new MindMapDialog(this,CreatePath1);
+        mapComponent->setGeometry(800,330,800,600);
+        mapComponent->show();
+
+        connect(mapComponent,&MindMapDialog::toPosition,textComponents,&MainWindow::turnToPosition);
 
     }
 }
@@ -306,6 +318,10 @@ void Widget::on_tableWidget_itemDoubleClicked(QTableWidgetItem *item)
     MainWindow *textComponents = new MainWindow(this,Path);
     textComponents->show();
     //
+    MindMapDialog *mapComponent = new MindMapDialog(this, Path);
+    mapComponent->show();
+
+      connect(mapComponent,&MindMapDialog::toPosition,textComponents,&MainWindow::turnToPosition);
 }
 
 /**---------------------------------------------------------------------------------*/
@@ -316,13 +332,25 @@ void Widget::on_treeView_2_clicked(const QModelIndex &index)
         CreatePath1 = sPath;
       CreatePath1 = filemodel->fileInfo(index).absoluteFilePath();
       CreatePath2 = filemodel->fileInfo(index).absolutePath();
+
+
+
 }
 
 void Widget::on_BuildFile_clicked()
 {
     //点击创建文件按钮后，弹出新的创建文件窗口
-    WidgetBuildFile *widgetbuildfile = new WidgetBuildFile(0,CreatePath1,sPath);
-    widgetbuildfile->show();
+
+
+    if(Get_suffix(CreatePath1).isEmpty()){
+        WidgetBuildFile *widgetbuildfile = new WidgetBuildFile(0,CreatePath1,sPath);
+        widgetbuildfile->show();
+    }else{
+        QFileInfo *f = new QFileInfo(CreatePath1);
+        WidgetBuildFile *widgetbuildfile = new WidgetBuildFile(0,f->absolutePath(),sPath);
+        widgetbuildfile->show();
+    }
+
 }
 
 /**---------------------------------------------------------------------------------*/
